@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using netcoreapi.Models;
 using netcoreapi.Services;
 
 namespace netcoreapi.Controllers
@@ -25,7 +26,17 @@ namespace netcoreapi.Controllers
         [HttpGet]
         public String Get()
         {
-            return "Hello World";
+            return "Testing";
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] User user)
+        {
+            if (user == null) return BadRequest();
+            return Ok(_userService.Create(user));
+
+        }
+
+       
     }
 }

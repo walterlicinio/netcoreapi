@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using netcoreapi.Models.Context;
 using netcoreapi.Services;
 using netcoreapi.Services.Implementations;
 
@@ -30,6 +32,12 @@ namespace netcoreapi
         {
 
             services.AddControllers();
+
+            //Database Connection
+            var connection = Configuration["MySQLConnection:MySQLConnectionString"];
+            services.AddDbContext<MySQLContext>
+                (options => options.UseMySql(
+                    connection, ServerVersion.AutoDetect(connection)));
 
             //Dependency Injection
             services.AddScoped<IUserService, UserServiceImplementation>();

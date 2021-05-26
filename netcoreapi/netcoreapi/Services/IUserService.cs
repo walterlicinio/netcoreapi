@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace netcoreapi.Services
 {
-    interface IUserService
+    public interface IUserService
     {
-        User Create(User user);
-        List<string> FindByMail(String mail);
+        User Create(User user); 
+        User FindByMail(String mail);
     }
 }
