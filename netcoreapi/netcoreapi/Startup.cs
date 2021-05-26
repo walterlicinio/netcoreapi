@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using netcoreapi.Services;
+using netcoreapi.Services.Implementations;
 
 namespace netcoreapi
 {
@@ -28,6 +30,10 @@ namespace netcoreapi
         {
 
             services.AddControllers();
+
+            //Dependency Injection
+            services.AddScoped<IUserService, UserServiceImplementation>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "netcoreapi", Version = "v1" });

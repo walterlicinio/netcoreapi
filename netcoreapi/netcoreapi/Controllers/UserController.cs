@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using netcoreapi.Services;
 
 namespace netcoreapi.Controllers
 {
@@ -13,10 +14,12 @@ namespace netcoreapi.Controllers
     {
    
         private readonly ILogger<UserController> _logger;
+        private IUserService _userService;
 
-        public UserController(ILogger<UserController> logger)
+        public UserController(ILogger<UserController> logger, IUserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
 
         [HttpGet]
